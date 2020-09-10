@@ -24,9 +24,7 @@ class MainAdapter: RecyclerView.Adapter<MainAdapter.MainHolder>() {
         fun bind(anime: Animes.Anime) {
             with(dataBinding) {
                 model = anime
-                itemEpisode.text = "${anime.episodes} episodes"
-                itemAiring.text = "Start date: ${anime.startDate}"
-                itemFinished.text = "End date: ${anime.endDate}"
+
                 itemVisit.setOnClickListener {
                     val i = Intent(Intent.ACTION_VIEW)
                     i.data = Uri.parse(anime.url)

@@ -64,6 +64,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
             android:maxLines="1"
+            android:text='@{String.join("", model.episodes, " Episodes")}'
             app:layout_constraintEnd_toEndOf="@+id/item_title"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/item_image"
@@ -78,6 +79,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
             android:maxLines="1"
+            android:text='@{String.join("", "Start Date: ", model.startDate)}'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/item_image"
@@ -92,6 +94,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
             android:maxLines="1"
+            android:text='@{String.join("", "End Date: ", model.endDate)}'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/item_image"
