@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface ApiService {
     @GET("/v3/top/anime")
-    suspend fun getTopAnimes(): Call<Animes>
+    fun getTopAnimes(): Call<Animes>
 }

@@ -20,14 +20,12 @@ class MainViewModel(private val repo: MainRepo): ViewModel() {
     fun getTopAnimes() {
         _animes.postValue(Resources.onLoading())
 
-        viewModelScope.launch {
-            repo.getTopAnimes().enqueue(object: Callback<Animes> {
-                override fun onResponse(call: Call<Animes>, response: Response<Animes>) =
-                    _animes.postValue(Resources.onSuccess(response.body()))
+        repo.getTopAnimes().enqueue(object: Callback<Animes> {
+            override fun onResponse(call: Call<Animes>, response: Response<Animes>) =
+                _animes.postValue(Resources.onSuccess(response.body()))
 
-                override fun onFailure(call: Call<Animes>, t: Throwable) =
-                    _animes.postValue(Resources.onError(t.message))
-            })
-        }
+            override fun onFailure(call: Call<Animes>, t: Throwable) =
+                _animes.postValue(Resources.onError(t.message))
+        })
     }
 }

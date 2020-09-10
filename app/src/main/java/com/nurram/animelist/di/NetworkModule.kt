@@ -6,7 +6,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.BuildConfig
 import org.koin.dsl.module
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 
 val networkModule = module {
     single { provideLoggingInterceptor() }
@@ -34,8 +34,8 @@ fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClien
 fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
     return Retrofit.Builder().baseUrl("https://api.jikan.moe/")
         .client(okHttpClient)
-        .addConverterFactory(MoshiConverterFactory.create())
+        .addConverterFactory(GsonConverterFactory.create())
         .build()
 }
 
-fun provideApiServices(retrofit: Retrofit) = retrofit.create(ApiService::class.java)
+fun provideApiServices(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)

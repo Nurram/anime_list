@@ -5,7 +5,6 @@ import android.view.View
 import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nurram.animelist.R
 import com.nurram.animelist.databinding.ActivityMainBinding
@@ -27,13 +26,17 @@ class MainActivity : AppCompatActivity() {
         dataBinding.recyclerview.layoutManager = LinearLayoutManager(this)
 
         viewModel.getTopAnimes()
-        viewModel.animes.observe(this, Observer {
+        viewModel.animes.observe(this, {
             when (it.status) {
-                Status.SUCCESS -> it.data?.top?.let { it1 ->
-                    adapter.setData(it1)
+                Status.SUCCESS -> {
+                    dataBinding.progress.visibility = View.GONE
+                    adapter.setData(it.data?.top!!)
                 }
                 Status.LOADING -> dataBinding.progress.visibility = View.VISIBLE
-                else -> Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
+                else -> {
+                    dataBinding.progress.visibility = View.GONE
+                    Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
+                }
             }
         })
     }
